@@ -2,55 +2,50 @@ import React, { useState } from "react";
 import "./App.css";
 import Modal from "react-modal";
 
-const ModalContent = ({ Addmodule }) => {
-  const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState("");
-  const [status, setStatus] = useState("");
+const ModalContent = ({ Addmodule, editIndex, tasks }) => {
+  const [title, setTitle] = useState(tasks[editIndex]?.title || "");
+  const [priority, setPriority] = useState(tasks[editIndex]?.priority || "");
+  const [status, setStatus] = useState(tasks[editIndex]?.status || "");
 
   function handletitle(event) {
-    const titlevalue = event.target.value;
-    setTitle(titlevalue);
+    setTitle(event.target.value);
   }
 
   function handlepriority(event) {
-    const Priorityvalue = event.target.value;
-    setPriority(Priorityvalue);
+    setPriority(event.target.value);
   }
 
   function handleStatus(event) {
-    const Statusvalue = event.target.value;
-    setStatus(Statusvalue);
+    setStatus(event.target.value);
   }
 
   function Transfer() {
     if (title && priority && status) {
-      setTitle("");
-      setPriority("");
-      setStatus("");
-      Addmodule({ title, priority, status });
+      Addmodule({ title, priority, status }, editIndex);
     }
   }
 
   return (
     <div className="modelcontent">
-      <h2 style={{ color: "white" }}>Enter Data</h2>
+      <h2 style={{ color: "white" }}>Edit Data</h2>
 
       <input
         className="input"
         type="text"
-        placeholder="Add Title..."
+        placeholder="Edit Title..."
+        value={title}
         onChange={handletitle}
       />
-      <select name="" id="" onChange={handlepriority}>
-        <option value="Priority" hidden>
+      <select value={priority} onChange={handlepriority}>
+        <option value="" hidden>
           Priority
         </option>
         <option value="High">High</option>
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
       </select>
-      <select name="" id="" onChange={handleStatus}>
-        <option value="Status" hidden>
+      <select value={status} onChange={handleStatus}>
+        <option value="" hidden>
           Status
         </option>
         <option value="Done">Done</option>
@@ -68,8 +63,10 @@ const ModalContent = ({ Addmodule }) => {
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [Tasks, setTasks] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
 
-  const openModal = () => {
+  const openModal = (index) => {
+    setEditIndex(index);
     setModalIsOpen(true);
   };
 
@@ -77,8 +74,14 @@ export default function Home() {
     setModalIsOpen(false);
   };
 
-  const Addmodule = (newItem) => {
-    setTasks([...Tasks, newItem]);
+  const Addmodule = (newItem, index) => {
+    const updatedTasks = [...Tasks];
+    if (index !== undefined && index !== null) {
+      updatedTasks[index] = newItem;
+    } else {
+      updatedTasks.push(newItem);
+    }
+    setTasks(updatedTasks);
     setModalIsOpen(false);
   };
 
@@ -92,7 +95,7 @@ export default function Home() {
     <div>
       <div className="content">
         <h1>TO DO LIST</h1>
-        <button onClick={openModal} className="homebtn">
+        <button onClick={() => openModal(null)} className="homebtn">
           Add Tasks
         </button>
       </div>
@@ -110,6 +113,9 @@ export default function Home() {
             <p>
               <h4>Status</h4> {Task.status}
             </p>
+            <button className="update" onClick={() => openModal(index)}>
+              Edit
+            </button>
             <button onClick={() => deleteItem(index)}>Delete</button>
           </div>
         ))}
@@ -120,7 +126,11 @@ export default function Home() {
         onRequestClose={closeModal}
         ariaHideApp={false}
       >
-        <ModalContent Addmodule={Addmodule} />
+        <ModalContent
+          Addmodule={Addmodule}
+          editIndex={editIndex}
+          tasks={Tasks}
+        />
       </Modal>
     </div>
   );

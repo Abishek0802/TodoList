@@ -38,7 +38,7 @@
 .map {
   display: flex;
   flex-direction: row;
-  column-gap: 90px;
+  column-gap: 50px;
   background-color: rgb(169, 239, 151);
   width: 550px;
   height: 120px;
@@ -58,4 +58,7 @@
 }
 .map > p > h4 {
   width: 70px;
+}
+.upadate {
+  color: red;
 }
