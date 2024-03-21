@@ -27,7 +27,7 @@ const ModalContent = ({ Addmodule, editIndex, tasks }) => {
 
   return (
     <div className="modelcontent">
-      <h2 style={{ color: "white" }}>Edit Data</h2>
+      <h2 style={{ color: "white" }}>Add Data</h2>
 
       <input
         className="input"
@@ -54,7 +54,7 @@ const ModalContent = ({ Addmodule, editIndex, tasks }) => {
       </select>
 
       <button style={{ backgroundColor: "lightgreen" }} onClick={Transfer}>
-        Add
+        Submit
       </button>
     </div>
   );
