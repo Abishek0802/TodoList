@@ -1,0 +1,61 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  column-gap: 400px;
+  text-align: center;
+  position: relative;
+  left: 28%;
+  border-radius: 10px;
+  padding: 10px;
+  background: #e0e0e0;
+}
+.input {
+  text-indent: 8px;
+}
+.homebtn {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(98, 185, 188);
+}
+.model {
+  width: 45%;
+  height: fit-content;
+  background-color: grey;
+  border-radius: 7px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  position: relative;
+  left: 25%;
+
+  background: #312d2d;
+}
+.map {
+  display: flex;
+  flex-direction: row;
+  column-gap: 90px;
+  background-color: rgb(169, 239, 151);
+  width: 550px;
+  height: 120px;
+  text-align: center;
+  align-items: end;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  left: 30%;
+  margin-top: 10px;
+  background: rgb(169, 239, 151);
+}
+.map > button {
+  height: fit-content;
+  background-color: rgb(225, 47, 47);
+  color: white;
+}
+.map > p > h4 {
+  width: 70px;
+}
